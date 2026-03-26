@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import './providers/counter_provider.dart';
 
 final counterProvider = StateProvider<int>((ref) => 0);
 void main() {
@@ -16,15 +17,32 @@ class MyApp extends StatelessWidget {
 class CounterScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final count=ref.watch(counterProvider);
+    final count = ref.watch(counterNotifierProvider);
     return Scaffold(
       appBar: AppBar(title: Text('My First Provider')),
-      body: Center(
-        child: Text("$count", style: TextStyle(fontSize: 30)),
+      body: Center(child: Text("$count", style: TextStyle(fontSize: 30))),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              ref.read(counterNotifierProvider.notifier).increment();
+            },
+            child: Text("+"),
+          ),FloatingActionButton(
+            onPressed: () {
+              ref.read(counterNotifierProvider.notifier).decrement();
+            },
+            child: Text("-"),
+          ),FloatingActionButton(
+            onPressed: () {
+              ref.read(counterNotifierProvider.notifier).reset();
+            },
+            child: Icon(Icons.refresh),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        ref.read(counterProvider.notifier).state++;
-      },child: Text("+"),),
     );
   }
 }
