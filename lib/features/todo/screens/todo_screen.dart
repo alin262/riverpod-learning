@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_learning/providers/todo_provider.dart';
-
-class TodoScreen extends ConsumerWidget {
+import 'package:riverpod_learning/features/todo/providers/todo_provider.dart';class TodoScreen extends ConsumerWidget {
   final TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
